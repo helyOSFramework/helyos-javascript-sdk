@@ -1,7 +1,6 @@
 node_modules/
 .idea/
 dist/
-docs
 .vscode
 .npmrc
 .DS_Store
