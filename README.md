@@ -13,7 +13,7 @@
   <p align="center">
     A Javascript wrap for helyOS GrapQL interface.
     <br />
-    <a href="https://helyOSFramework.github.io/helyos-javascript-sdk/"><strong>Explore the docs »</strong></a>
+    <a href="https://helyosframework.github.io/helyos-javascript-sdk/classes/HelyosServices.html"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/">View Demo</a>
