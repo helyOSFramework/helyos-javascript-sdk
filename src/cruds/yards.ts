@@ -94,7 +94,6 @@ import { H_Yard  } from '../helyos.models';
         `;
 
         const postMessage = { clientMutationId: "not_used", yard: yard };
-        console.log("postMessage",postMessage)
         return this._client.mutate({ mutation: CREATE, variables: { postMessage, yard: yard } })
                 .then(response => {
                     return response.data.createYard.yard;

@@ -62,7 +62,7 @@ import { H_WorkProcess  } from '../helyos.models';
 
             })
             .catch(e => {
-                    console.log(e);
+                    console.error(e);
                     return e;
              });
 
@@ -100,7 +100,6 @@ import { H_WorkProcess  } from '../helyos.models';
 
             stringifyJsonFields(workProcess, ['data']);
             const postMessage = { clientMutationId: "not_used", workProcess: workProcess };
-            console.log("postMessage",postMessage)
             return this._client.mutate({ mutation: CREATE, variables: { postMessage, workProcess: workProcess } })
                 .then(response => {
                     return response.data.createWorkProcess.workProcess;
@@ -144,19 +143,16 @@ import { H_WorkProcess  } from '../helyos.models';
             const postMessage = { id: wprocess.id, workProcessPatch: patch };
             return this._client.mutate({ mutation: UPDATE, variables: { postMessage } })
                 .then(response => {
-                    console.log('create request', response);
                     return response;
                 })
                 .catch(e => {
-                    console.log(e);
+                    console.error(e);
                     return e;
                 });
         }
 
 
         get(workProcessId: string ): Promise<any> {
-            console.log("id", workProcessId)
-
             const QUERY_FUNTCION = 'workProcessById';
             const QUERY_STR = gql`
             query ${QUERY_FUNTCION}($workProcessId: BigInt! ){
@@ -189,7 +185,7 @@ import { H_WorkProcess  } from '../helyos.models';
                         return data;
                     })
                     .catch(e => {
-                    console.log(e);
+                    console.error(e);
                     return e;
                 });
 
@@ -198,7 +194,6 @@ import { H_WorkProcess  } from '../helyos.models';
 
 
         getActions(workProcessId: string ): Promise<any> {
-            console.log("workProcessId id", workProcessId)
             // use Int! because the postgress function is recognized as Int!.
             const QUERY_FUNTCION = 'getworkprocessactiondata';
             const QUERY_STR = gql`
@@ -223,7 +218,7 @@ import { H_WorkProcess  } from '../helyos.models';
                     return actions;
                 })
                 .catch(e => {
-                    console.log(e);
+                    console.error(e);
                     return e;
                 });
 

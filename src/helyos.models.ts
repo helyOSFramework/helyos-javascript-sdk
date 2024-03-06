@@ -233,7 +233,7 @@ export class H_WorkProcess {
     processType: string;
     workProcessTypeName: string;
     workProcessTypeId: string;
-    description: MoveToTargetDescriptor | MoveFreeDescriptor | string;
+    description: string;
     data: any;
     waitFreeAgent: boolean;
 }
@@ -276,20 +276,6 @@ export class H_WorkProcessServicePlan {
 
 }
 
-export class MoveToTargetDescriptor  {
-    agentId: string | number;
-    targetId?: string | number;
-    targetType?: string;
-} 
-
-export class MoveFreeDescriptor  {
-    agentId: string | number;
-    x: number;
-    y: number;
-    orientation: number;
-    orientations?: number[];
-
-} 
 
 export class H_Target {
     id: string | number;

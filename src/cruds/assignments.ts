@@ -111,8 +111,6 @@ import { H_Assignment } from '../helyos.models';
 
 
     get(assignmentId: string ): Promise<H_Assignment> {
-        console.log("id", assignmentId)
-
         const QUERY_FUNTCION = 'assignmentById';
         const QUERY_STR = gql`
         query ${QUERY_FUNTCION}($assignmentId:  BigInt! ){
@@ -183,7 +181,6 @@ import { H_Assignment } from '../helyos.models';
 
         return this._client.mutate({ mutation: SHAPE_UPDATE, variables: { postMessage, assignment: patch } })
             .then(response => {
-                console.log('create request', response);
                 return response;
             })
             .catch(e => {

@@ -86,7 +86,6 @@ import { H_MissionQueue  } from '../helyos.models';
 
 
             const postMessage = { clientMutationId: "not_used", missionQueue: missionQueue };
-            console.log("postMessage",postMessage)
             return this._client.mutate({ mutation: CREATE, variables: { postMessage, missionQueue: missionQueue } })
                 .then(response => {
                     return response.data.createMissionQueue.missionQueue;

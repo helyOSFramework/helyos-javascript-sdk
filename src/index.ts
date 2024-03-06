@@ -61,6 +61,7 @@ export class HelyosServices {
     workProcessType: WORKPROCESS_TYPE;
     extServices: EXTERNALSERVICES;
     servciceRequests: SERVICEREQUESTS;
+    serviceRequests: SERVICEREQUESTS;
     toolsInterconnections: AGENTS_INTERCONNECTIONS;
     agentsInterconnections: AGENTS_INTERCONNECTIONS;
 
@@ -120,12 +121,10 @@ export class HelyosServices {
             this.extServices = new EXTERNALSERVICES(this._client, this.socket);
             this.assignments = new ASSIGNMENT(this._client, this.socket);
             this.servciceRequests = new SERVICEREQUESTS(this._client, this.socket);
+            this.serviceRequests = new SERVICEREQUESTS(this._client, this.socket);
             this.toolsInterconnections = new AGENTS_INTERCONNECTIONS(this._client, this.socket);
             this.agentsInterconnections = new AGENTS_INTERCONNECTIONS(this._client, this.socket);
             
-
-        } else {
-            console.log('web socket is not connected; check websocket url and port or try to login (username, password) again.')
         }
     }
 
@@ -173,7 +172,6 @@ export class HelyosServices {
         `;
 
         const postMessage = { clientMutationId: "not_used", ...{name, username, password, adminPassword} };
-        console.log("postMessage",postMessage)
         return this._client.mutate({ mutation: GQL_REQUEST, variables: { postMessage, ...{name, username, password, adminPassword} } })
             .then(response => {
                 return response.data[QUERY_FUNTCION].user;
@@ -196,7 +194,6 @@ export class HelyosServices {
         `;
         
         const postMessage = { clientMutationId: "not_used", ...{username, password} };
-        console.log("postMessage",postMessage)
         return this._client.mutate({ mutation: GQL_REQUEST, variables: { postMessage, ...{username, password} } })
             .then(response => {
                 if (response.data[QUERY_FUNTCION].jwtToken) {
@@ -223,7 +220,6 @@ export class HelyosServices {
         }
         `;
         const postMessage = { clientMutationId: "not_used", ...{username} };
-        console.log("postMessage",postMessage)
         return this._client.mutate({ mutation: GQL_REQUEST, variables: { postMessage, ...{username} } })
             .then(response => {
                 return response.data[QUERY_FUNTCION];
@@ -245,7 +241,6 @@ export class HelyosServices {
         `;
         
         const postMessage = { clientMutationId: "not_used", ...{username, currentPassword, newPassword} };
-        console.log("postMessage",postMessage)
         return this._client.mutate({ mutation: GQL_REQUEST, variables: { postMessage, ...{username, currentPassword, newPassword} } })
             .then(response => {
 
@@ -269,7 +264,6 @@ export class HelyosServices {
         `;
         
         const postMessage = { clientMutationId: "not_used", ...{username, password} };
-        console.log("postMessage",postMessage)
         return this._client.mutate({ mutation: GQL_REQUEST, variables: { postMessage, ...{username, password} } })
             .then(response => {
                 return response.data[QUERY_FUNTCION];
@@ -295,7 +289,6 @@ export class HelyosServices {
             username = this.username;
         }
         const postMessage = { clientMutationId: "not_used", ...{username} };
-        console.log("postMessage",postMessage)
         return this._client.mutate({ mutation: GQL_REQUEST, variables: { postMessage, ...{username} } })
             .then(response => {
                 if (response.data[QUERY_FUNTCION].jwtToken) {

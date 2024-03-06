@@ -80,7 +80,6 @@ import { H_UserAccount  } from '../helyos.models';
 
         stringifyJsonFields(userAccount, ['metadata']);
         const postMessage = { clientMutationId: "not_used", userAccount: userAccount };
-        console.log("postMessage",postMessage)
         return this._client.mutate({ mutation: CREATE, variables: { postMessage, userAccount: userAccount } })
                 .then(response => {
                     return response.data.createUserAccount.userAccount;
