@@ -124,7 +124,6 @@ import { H_MissionQueue  } from '../helyos.models';
             const postMessage = { id: wprocess.id, missionQueuePatch: patch };
             return this._client.mutate({ mutation: UPDATE, variables: { postMessage } })
                 .then(response => {
-                    console.log('create request', response);
                     return response;
                 })
                 .catch(e => {
@@ -135,8 +134,6 @@ import { H_MissionQueue  } from '../helyos.models';
 
 
         get(missionQueueId: string ): Promise<any> {
-            console.log("id", missionQueueId)
-
             const QUERY_FUNTCION = 'missionQueueById';
             const QUERY_STR = gql`
             query ${QUERY_FUNTCION}($missionQueueId: BigInt! ){

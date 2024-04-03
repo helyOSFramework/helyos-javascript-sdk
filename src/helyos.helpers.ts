@@ -5,6 +5,10 @@ const isObject = (value) => (typeof value === 'object');
 const isString = (value) => (typeof value === 'string' ||  value instanceof String)
 
 export const gqlJsonResponseHandler = (res: any, queryName: string) => {
+    if (!res.data[queryName]) {
+        return null;
+    }
+
     if (res.data[queryName].edges) {
             return res.data[queryName].edges.map((gqlElement: any) =>  gqlElement.node);
     } else {
