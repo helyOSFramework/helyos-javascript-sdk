@@ -294,7 +294,8 @@ export class HelyosServices {
                 if (response.data[QUERY_FUNTCION].jwtToken) {
                     this.token = null;
                 }
-                return{msg:'token invalidated'};
+                this.socket.disconnect();
+                return{msg:'auth token invalidated and socket disconnected.'};
             })
             .catch(e => {
                     console.log(e);

@@ -1,7 +1,7 @@
 import { ApolloClient } from "apollo-client";
 import gql from "graphql-tag";
 
-import { gqlJsonResponseHandler, gqlJsonResponseInstanceHandler, parseStringifiedJsonColumns, stringifyJsonFields } from "../helyos.helpers";
+import { gqlJsonResponseHandler, parseStringifiedJsonColumns, stringifyJsonFields } from "../helyos.helpers";
 import { H_Assignment } from '../helyos.models';
 
 
@@ -64,7 +64,7 @@ import { H_Assignment } from '../helyos.models';
 
 
     createMany(assignments: Partial<H_Assignment>[]): Promise<any> {
-        const promise_list = assignments.map(s => this.create(s).then(r=>r[0])); // 30.09.2020: I don't remember why I am returning an one-element array in create(). Carlos
+        const promise_list = assignments.map(s => this.create(s).then(r=>r[0])); 
         return Promise.all(promise_list);
     }
 
@@ -99,12 +99,12 @@ import { H_Assignment } from '../helyos.models';
         delete postData.id;
         delete postData['__typename'];
 
-        stringifyJsonFields(postData, ['data', 'context']);
+        stringifyJsonFields(postData, ['data', 'context', 'result']);
 
         const postMessage = { clientMutationId: "not_used", assignment: postData };
         return this._client.mutate({ mutation: SHAPE_CREATE, variables: { postMessage, assignment: postData } })
             .then(response => {
-                return [response.data[QUERY_FUNTCION].assignment];  // 30.09.2020: I don't remember why I am returning an one-element array here. Carlos
+                return response.data[QUERY_FUNTCION].assignment;  
             })
             .catch(e => console.log("postAssignment called by" + this.create.caller, e))
     }
@@ -175,7 +175,7 @@ import { H_Assignment } from '../helyos.models';
 
         const patch = {...assignment};
         delete patch['__typename'];
-        stringifyJsonFields(patch, [ 'data', 'context']);
+        stringifyJsonFields(patch, [ 'data', 'context', 'result']);
 
         const postMessage = { id: assignment.id, assignmentPatch: patch };
 

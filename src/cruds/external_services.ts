@@ -93,7 +93,6 @@ import { H_Service } from '../helyos.models';
             `;
 
             const postMessage = { clientMutationId: "not_used", service: service };
-            console.log("postMessage",postMessage)
             return this._client.mutate({ mutation: CREATE, variables: { postMessage, service: service } })
                 .then(response => {
                     return gqlJsonResponseInstanceHandler(response, QUERY_FUNTCION,'service' );

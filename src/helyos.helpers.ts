@@ -40,7 +40,7 @@ export const parseStringifiedJsonColumns = (list: any[], columnNames: string[] )
     const _list = [...list];
     _list.forEach(obj => {
         columnNames.forEach(name => {
-            if (obj[name] && !isObject(obj[name])) {
+            if (obj && obj[name] && !isObject(obj[name])) {
                 try {
                     obj[name] = JSON.parse(obj[name]);
                 } catch (error) {
