@@ -1,6 +1,6 @@
 {
   "name": "helyosjs-sdk",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Comunication with helyos postgress database using graphql interface",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -20,7 +20,6 @@
     "javascript",
     "api"
   ],
-  "author": "Carlos Viol Barbosa",
   "license": "MIT",
   "devDependencies": {
     "@types/basic-auth": "^1.1.2",

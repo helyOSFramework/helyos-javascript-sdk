@@ -54,7 +54,8 @@ import { H_Yard  } from '../helyos.models';
         this.lastListPromise= this._client.query({ query: TOOL_QUERY, variables:  { condition: condition } })
             .then(response => {
                 self.fetching =  false;
-                return gqlJsonResponseHandler(response, QUERY_FUNTCION);
+                const listItems = gqlJsonResponseHandler(response, QUERY_FUNTCION);
+                return parseStringifiedJsonColumns(listItems, ['mapData']);
             })
             .catch(e => {
                     console.log(e);
@@ -67,6 +68,7 @@ import { H_Yard  } from '../helyos.models';
 
 
     create(yard: Partial<H_Yard>): Promise<any> {
+        const QUERY_FUNTCION = 'createYard';
         const CREATE = gql`
         mutation createYard ($postMessage: CreateYardInput!){
             createYard(input: $postMessage) {
@@ -93,10 +95,16 @@ import { H_Yard  } from '../helyos.models';
         
         `;
 
-        const postMessage = { clientMutationId: "not_used", yard: yard };
+        const patch = {...yard};
+        delete patch['__typename'];
+        stringifyJsonFields(patch,['mapData']);
+
+        const postMessage = { clientMutationId: "not_used", yard: patch };
+        console.log("postMessage",postMessage)
         return this._client.mutate({ mutation: CREATE, variables: { postMessage, yard: yard } })
                 .then(response => {
-                    return response.data.createYard.yard;
+                    const data = gqlJsonResponseInstanceHandler(response, QUERY_FUNTCION,'yard' );
+                    return parseStringifiedJsonColumns([data], ['mapData'])[0];
                 })
                 .catch(e => {
                     console.log(e);
@@ -111,7 +119,7 @@ import { H_Yard  } from '../helyos.models';
 
     patch(yard: Partial<H_Yard>): Promise<any> {
         const QUERY_FUNTCION = 'updateYardById';
-        const TOOL_UPDATE = gql`
+        const YARD_UPDATE = gql`
         mutation updateYardById ($postMessage: UpdateYardByIdInput!){
             updateYardById(input: $postMessage) {
                     yard {
@@ -136,12 +144,14 @@ import { H_Yard  } from '../helyos.models';
         }
         `;
 
-        delete yard['__typename'];
-        const postMessage = { id: yard.id, yardPatch: yard };
-        return  this._client.mutate({ mutation: TOOL_UPDATE, variables: { postMessage, yard: yard } })
+        const patch = {...yard};
+        delete patch['__typename'];
+        stringifyJsonFields(patch,['mapData']);
+        const postMessage = { id: yard.id, yardPatch: patch };
+        return  this._client.mutate({ mutation: YARD_UPDATE, variables: { postMessage, yard: patch } })
             .then(response => {
-                console.log('update request response', response);
-                return gqlJsonResponseInstanceHandler(response, QUERY_FUNTCION,'yard' );
+                const data = gqlJsonResponseInstanceHandler(response, QUERY_FUNTCION,'yard' );
+                return parseStringifiedJsonColumns([data], ['mapData'])[0];
             })
             .catch(e => {
                     console.log(e);
@@ -153,7 +163,7 @@ import { H_Yard  } from '../helyos.models';
     
     get(yardId: string ): Promise<H_Yard> {
         const QUERY_FUNTCION = 'yardById';
-        const SHAPE_QUERY = gql`
+        const GET_QUERY = gql`
         query ${QUERY_FUNTCION}($yardId: BigInt! ){
             ${QUERY_FUNTCION}(id: $yardId) {
                 id,
@@ -177,10 +187,11 @@ import { H_Yard  } from '../helyos.models';
         `;
 
 
-        this.getActionPromise = this._client.query({ query: SHAPE_QUERY, variables: {yardId: parseInt(yardId)  } })
+        this.getActionPromise = this._client.query({ query: GET_QUERY, variables: {yardId: parseInt(yardId)  } })
             .then(response => {
                 const data = gqlJsonResponseHandler(response, QUERY_FUNTCION);
-                return data;
+                return parseStringifiedJsonColumns([data], ['mapData'])[0];
+     
             })
             .catch(e => {
                     console.log(e);
@@ -192,7 +203,7 @@ import { H_Yard  } from '../helyos.models';
 
     delete(id): Promise<any> {
         const QUERY_FUNTCION = 'deleteYardById';
-        const SHAPE_QUERY = gql`
+        const DELETE_QUERY = gql`
         mutation ${QUERY_FUNTCION}($deletedYardById:  DeleteYardByIdInput! ){
             ${QUERY_FUNTCION}(input: $deletedYardById) {
                 deletedYardId
@@ -200,7 +211,7 @@ import { H_Yard  } from '../helyos.models';
         }
         `;
 
-        return  this._client.query({ query: SHAPE_QUERY, variables: {deletedYardById: {id:parseInt(id,10) }} })
+        return  this._client.query({ query: DELETE_QUERY, variables: {deletedYardById: {id:parseInt(id,10) }} })
             .then(response => {
                 if (response.errors) {
                     return response.errors[0];
