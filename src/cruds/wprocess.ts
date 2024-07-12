@@ -173,7 +173,8 @@ import { H_WorkProcess  } from '../helyos.models';
                         description,
                         workProcessTypeName,
                         agentIds,
-                        waitFreeAgent
+                        waitFreeAgent,
+                        onAssignmentFailure
                 }
             }
             `;

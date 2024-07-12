@@ -129,7 +129,6 @@ import { H_Service } from '../helyos.models';
             const postMessage = { id: data.id, servicePatch: data };
             return this._client.mutate({ mutation: UPDATE, variables: { postMessage } })
                 .then(response => {
-                    console.log('create request', response);
                     return gqlJsonResponseInstanceHandler(response, QUERY_FUNTCION,'service' );
                 })
                 .catch(e => {
@@ -161,7 +160,9 @@ import { H_Service } from '../helyos.models';
                         resultTimeout,
                         requireMapData,
                         requireMissionAgentsData,
-                        requireAgentsData
+                        requireAgentsData,
+                        requireMapObjects
+
                 }
             }
             `;
@@ -170,7 +171,7 @@ import { H_Service } from '../helyos.models';
             return this._client.query({ query: QUERY_STR, variables: {serviceId: parseInt(serviceId)  } })
                 .then(response => {
                     const data = gqlJsonResponseHandler(response, QUERY_FUNTCION);
-                    return data;
+                    return parseStringifiedJsonColumns([data], ['requireMapObjects'])[0];
                 })
                 .catch(e => {
                     console.log(e);

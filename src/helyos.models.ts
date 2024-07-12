@@ -188,6 +188,8 @@ export class H_Service {
     requireMapData: boolean;
     requireMissionAgentsData: boolean;
     requireAgentsData: boolean;
+    requireMapObjects: string[];
+
 }
 
 export class H_ServiceRequest {
@@ -223,6 +225,7 @@ export class H_WorkProcess {
     missionQueueId: number;
     runOrder: number;
     agentIds: number[];
+    agentUuids: string[];
     status: string;
     createdAt: Date;
     modifiedAt: Date
@@ -236,6 +239,7 @@ export class H_WorkProcess {
     description: string;
     data: any;
     waitFreeAgent: boolean;
+    onAssignmentFailure: string;
 }
 
 export class H_MissionQueue  {
@@ -260,6 +264,7 @@ export class H_WorkProcessType {
     dispatchOrder: string[][];
     settings: any = {};
     extraParams: any;
+    onAssignmentFailure: string;
 }
 
 export class H_WorkProcessServicePlan {
