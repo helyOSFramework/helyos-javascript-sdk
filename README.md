@@ -69,8 +69,8 @@ const password = 'password';
 .then( response => helyosService.connect())
 .then( connected => console.log(connected));;
 
-function listAgents {
-    return helyosService.agents.list(0)
+function listAgents(conditions={}) {
+    return helyosService.agents.list(conditions)
     .then((agents: H_Agent[]) => {
         console.log(agents);
     });
