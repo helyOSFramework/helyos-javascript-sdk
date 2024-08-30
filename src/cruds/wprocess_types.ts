@@ -35,8 +35,8 @@ import { H_WorkProcessType } from '../helyos.models';
                     dispatchOrder,
                     settings,
                     extraParams,
-                    onAssignmentFailure
-
+                    onAssignmentFailure,
+                    fallbackMission
                     }
                 }
                 }
@@ -142,8 +142,8 @@ import { H_WorkProcessType } from '../helyos.models';
                     dispatchOrder,
                     settings,
                     extraParams,
-                    onAssignmentFailure
-
+                    onAssignmentFailure,
+                    fallbackMission
                 }
             }
             `;

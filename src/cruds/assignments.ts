@@ -129,6 +129,8 @@ import { H_Assignment } from '../helyos.models';
                 error
                 createdAt
                 modifiedAt
+                onAssignmentFailure
+                fallbackMission
                 }
         }
         `;

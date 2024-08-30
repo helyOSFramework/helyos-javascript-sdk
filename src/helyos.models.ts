@@ -240,6 +240,7 @@ export class H_WorkProcess {
     data: any;
     waitFreeAgent: boolean;
     onAssignmentFailure: string;
+    fallbackMission: string;
 }
 
 export class H_MissionQueue  {
@@ -265,6 +266,7 @@ export class H_WorkProcessType {
     settings: any = {};
     extraParams: any;
     onAssignmentFailure: string;
+    fallbackMission: string;
 }
 
 export class H_WorkProcessServicePlan {
@@ -353,6 +355,8 @@ export class H_Assignment {
     dependOnAssignments:number[];
     nextAssignments: number[];
     context: {assignmentId: number, status: string, result: any}[];
-    result: any
+    result: any;
+    onAssignmentFailure: string;
+    fallbackMission: string;
 }
 
