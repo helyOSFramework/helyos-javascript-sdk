@@ -241,6 +241,7 @@ export class H_WorkProcess {
     waitFreeAgent: boolean;
     onAssignmentFailure: string;
     fallbackMission: string;
+    operationTypesRequired: string[];
 }
 
 export class H_MissionQueue  {
