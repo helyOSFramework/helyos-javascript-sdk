@@ -161,8 +161,8 @@ import { H_Service } from '../helyos.models';
                         requireMapData,
                         requireMissionAgentsData,
                         requireAgentsData,
-                        requireMapObjects
-
+                        requireMapObjects,
+                        description
                 }
             }
             `;

@@ -189,7 +189,7 @@ export class H_Service {
     requireMissionAgentsData: boolean;
     requireAgentsData: boolean;
     requireMapObjects: string[];
-
+    description: string;
 }
 
 export class H_ServiceRequest {
