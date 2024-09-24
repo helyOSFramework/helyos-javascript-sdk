@@ -73,7 +73,7 @@ import { H_ServiceRequest, H_Service  } from '../helyos.models';
 
 
 
-        get(serviceRequestId: string ): Promise<H_Service> {
+        get(serviceRequestId: string ): Promise<H_ServiceRequest> {
 
             const QUERY_FUNTCION = 'serviceRequestById';
             const QUERY_STR = gql`
