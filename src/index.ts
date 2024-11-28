@@ -75,6 +75,7 @@ export class HelyosServices {
     public ports: any;
     public url: string;
     public username: string;
+    public listenYardId: string;
 
     constructor(url:string, ports:{socketPort:string, gqlPort: string}, token=null) {
         this.url = url;
@@ -129,11 +130,12 @@ export class HelyosServices {
     }
 
 
-    connect() : Promise <any> {
+    connect(listenYardId: any = 'all') : Promise <any> {
+        this.listenYardId = `${listenYardId}`;
         const self = this;
         const socketOptions = {
             transports : ['websocket'],
-            auth: {token: this.token}
+            auth: {token: this.token, room: this.listenYardId}
         };
 
         this.socket =  io( `${this.url}:${this.ports.socketPort}/`,socketOptions);

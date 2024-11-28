@@ -241,6 +241,7 @@ export class AGENTS {
                 wpClearance
                 name
                 code
+                description
                 connectionStatus
                 agentType
                 agentClass
@@ -267,6 +268,7 @@ export class AGENTS {
                 sensors
                 allowAnonymousCheckin
                 rbmqUsername
+                rbmqVhost
                 acknowledgeReservation
                 protocol
             }

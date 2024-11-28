@@ -40,7 +40,7 @@ import { H_Yard  } from '../helyos.models';
                         deletedAt,
                         modifiedAt,
                         pictureBase64,
-                        picturePos,
+                        picturePos
                     }
                 }   
             }
@@ -177,6 +177,8 @@ import { H_Yard  } from '../helyos.models';
                 lat,
                 lon,
                 alt,
+                rbmq_vhost,
+                coordinateUnit,
                 createdAt,
                 deletedAt,
                 modifiedAt,

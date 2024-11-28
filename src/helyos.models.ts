@@ -22,6 +22,7 @@ export class H_Tools {
     connectionStatus: string;
     name: string = 'Unnamed';
     code: string;
+    description: string;
     agentType: string;
     agentClass: AgentClass;
     dataFormat: string; 
@@ -45,6 +46,7 @@ export class H_Tools {
     verifySignature: boolean;
     allowAnonymousCheckin: boolean;
     rbmqUsername: string;
+    rbmqVhost: string;
     publicKey: string;
     acknowledgeReservation: boolean;
     isActuator: boolean;
@@ -155,8 +157,10 @@ export class  H_InstantAction {
 export class H_Yard {
     id: string | number;
     uid: string;
+    rbmqVhost: string;
     name: string;
     dataFormat: string;
+    coordinateUnit: string;
     description: string;
     yardType: string;
     lat: number;
