@@ -271,6 +271,9 @@ export class AGENTS {
                 rbmqVhost
                 acknowledgeReservation
                 protocol
+                coordinateFrame
+                unit
+                referencePoint
             }
         }
         `;

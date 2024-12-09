@@ -51,6 +51,9 @@ export class H_Tools {
     acknowledgeReservation: boolean;
     isActuator: boolean;
     protocol: 'AMQP' | 'MQTT';
+    coordinateFrame: string;
+    unit:string;
+    referencePoint: string;
 
 
 /*
@@ -172,6 +175,8 @@ export class H_Yard {
     modifiedAt: Date;
     pictureBase64: string;
     picturePos: any;
+    coordinateFrame: string;
+    unit:string;
 }
 
 export interface GeoPoint {lat: number, lon: number, zoomLevel: number}

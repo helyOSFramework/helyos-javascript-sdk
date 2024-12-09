@@ -177,13 +177,14 @@ import { H_Yard  } from '../helyos.models';
                 lat,
                 lon,
                 alt,
-                rbmq_vhost,
-                coordinateUnit,
+                rbmqVhost,
+                coordinateFrame,
                 createdAt,
                 deletedAt,
                 modifiedAt,
                 pictureBase64,
                 picturePos,
+                unit
             }
         }
         `;
