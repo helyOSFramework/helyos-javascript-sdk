@@ -274,6 +274,10 @@ export class AGENTS {
                 coordinateFrame
                 unit
                 referencePoint
+                readPermissions
+                writePermissions
+                configurePermissions
+
             }
         }
         `;

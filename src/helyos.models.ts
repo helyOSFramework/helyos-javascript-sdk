@@ -8,11 +8,39 @@ import { bindContext } from "optimism";
 
 export type Timestamp = number | string | Date;
 
+export class H_RBMQConfig {
+    id: number; 
+    agentsUlExchange: string; 
+    agentsDlExchange: string; 
+    agentsMqttExchange: string; 
+    agentsAnonymousExchange: string; 
+    rbmqVhost: string | null; 
+
+    constructor(
+        id: number,
+        agentsUlExchange: string = 'xchange_helyos.agents.ul',
+        agentsDlExchange: string = 'xchange_helyos.agents.dl',
+        agentsMqttExchange: string = 'xchange_helyos.agents.mqtt',
+        agentsAnonymousExchange: string = 'xchange_helyos.agents.anonymous',
+        rbmqVhost: string | null = null
+    ) {
+        this.id = id;
+        this.agentsUlExchange = agentsUlExchange;
+        this.agentsDlExchange = agentsDlExchange;
+        this.agentsMqttExchange = agentsMqttExchange;
+        this.agentsAnonymousExchange = agentsAnonymousExchange;
+        this.rbmqVhost = rbmqVhost;
+    }
+}
+
+
 export enum AgentClass {
     Vehicle = 'vehicle',    
     Assistant = 'assistant',
-    Tool = 'tool'
+    Tool = 'tool', 
+    ChargeStation = 'charge_station'
 }
+
 export class H_Tools {
     id: number |  string;
     yardId: number;
@@ -54,6 +82,9 @@ export class H_Tools {
     coordinateFrame: string;
     unit:string;
     referencePoint: string;
+    configurePermissions: string;
+    readPermissions: string;
+    writePermissions: string;
 
 
 /*

@@ -3,7 +3,7 @@ import { ApolloClient, DefaultOptions } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { HttpLink } from "apollo-link-http";
 import { setContext } from 'apollo-link-context';
-import { H_Shape, H_Target, H_WorkProcess, H_Tools, H_Yard, H_Action, GeoPoint, Timestamp, H_Service,  H_MissionQueue, H_MapObject, H_AgentInterconnection,
+import { H_Shape, H_Target, H_WorkProcess, H_Tools, H_Yard, H_Action, GeoPoint, Timestamp, H_Service,  H_MissionQueue, H_MapObject, H_AgentInterconnection, H_RBMQConfig,
         H_WorkProcessType, H_WorkProcessServicePlan, H_Guideline, H_Assignment, H_ServiceRequest, H_SystemLog, H_UserAccount, H_InstantAction, H_Agent } from './helyos.models';
 import { io } from "socket.io-client";
 import { AGENTS } from "./cruds/agents";
@@ -21,6 +21,7 @@ import { MAPOBJECTS } from "./cruds/map_objects";
 import { INSTANT_ACTIONS } from "./cruds/instant_actions";
 import { MISSIONQUEUE } from "./cruds/mission_queue";
 import { AGENTS_INTERCONNECTIONS } from "./cruds/tools_interconnections";
+import { RBMQ_CONFIG } from "./cruds/rabbitmq_config";
 
 
 const UTMConverter = require('utm-converter');
@@ -40,7 +41,7 @@ const defaultOptions: DefaultOptions = {
 }
 
 
-export { H_MapObject, H_Shape, H_InstantAction, H_ServiceRequest, H_Assignment, H_Target, H_WorkProcess, H_WorkProcessServicePlan,  H_WorkProcessType,
+export { H_MapObject, H_Shape, H_InstantAction, H_ServiceRequest, H_Assignment, H_Target, H_WorkProcess, H_WorkProcessServicePlan,  H_WorkProcessType, H_RBMQConfig,
          H_Tools, H_Agent, H_Yard, H_Action, GeoPoint, H_Service, H_Guideline, H_SystemLog, H_UserAccount, Timestamp, H_MissionQueue, H_AgentInterconnection };
 
 
@@ -64,6 +65,7 @@ export class HelyosServices {
     serviceRequests: SERVICEREQUESTS;
     toolsInterconnections: AGENTS_INTERCONNECTIONS;
     agentsInterconnections: AGENTS_INTERCONNECTIONS;
+    RBMQConfig: RBMQ_CONFIG;
 
 
     public connectionId: number;
@@ -125,6 +127,7 @@ export class HelyosServices {
             this.serviceRequests = new SERVICEREQUESTS(this._client, this.socket);
             this.toolsInterconnections = new AGENTS_INTERCONNECTIONS(this._client, this.socket);
             this.agentsInterconnections = new AGENTS_INTERCONNECTIONS(this._client, this.socket);
+            this.RBMQConfig = new RBMQ_CONFIG(this._client, this.socket)
             
         }
     }
