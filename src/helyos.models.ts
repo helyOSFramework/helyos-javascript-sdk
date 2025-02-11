@@ -14,6 +14,7 @@ export class H_RBMQConfig {
     agentsDlExchange: string; 
     agentsMqttExchange: string; 
     agentsAnonymousExchange: string; 
+    rbmqHost: string | null; 
     rbmqVhost: string | null; 
 
     constructor(

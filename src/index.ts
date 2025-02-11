@@ -74,16 +74,19 @@ export class HelyosServices {
     public token;
     private _httpLink: HttpLink; 
     private _client: ApolloClient<any>;
-    public ports: any;
+    public ports: {socketPort:string, gqlPort: string};
+    public path: string;
     public url: string;
     public username: string;
     public listenYardId: string;
 
-    constructor(url:string, ports:{socketPort:string, gqlPort: string}, token=null) {
+    constructor(url:string, configOptions:{socketPort:string, gqlPort: string, path:string}, token=null) {
         this.url = url;
-        this.ports = ports;
+        this.ports = {socketPort: configOptions?.socketPort, gqlPort: configOptions?.gqlPort};
+        this.path = configOptions?.path;
+        const _path = this.path? `/${this.path}`: '/graphql';
         this._httpLink = new HttpLink({
-            uri: `${url}:${ports.gqlPort}/graphql`, fetch
+            uri: `${url}:${this.ports.gqlPort}${_path}`, fetch
         });
 
         const authLink = setContext((_, { headers }) => {
@@ -136,12 +139,14 @@ export class HelyosServices {
     connect(listenYardId: any = 'all') : Promise <any> {
         this.listenYardId = `${listenYardId}`;
         const self = this;
+        const _path = this.path? `/${this.path}/socket.io`: '/socket.io';
         const socketOptions = {
             transports : ['websocket'],
-            auth: {token: this.token, room: this.listenYardId}
+            auth: {token: this.token, room: this.listenYardId},
+            path: _path
         };
 
-        this.socket =  io( `${this.url}:${this.ports.socketPort}/`,socketOptions);
+        this.socket =  io( `${this.url}:${this.ports.socketPort}`,socketOptions);
         const promise = new Promise((resolve, reject) => {
             const self2 = self;
             self.socket.on('connect', () =>{
@@ -157,6 +162,12 @@ export class HelyosServices {
                                 });
                                 self2.set_client(authLink);
                                 resolve (true)
+            });
+
+            // Handle connection errors
+            this.socket.on('connect_error', (err) => {
+                console.error('Socket connection error:', err);
+                reject(new Error(`Connection failed: ${err.message}`));
             });
         });
 

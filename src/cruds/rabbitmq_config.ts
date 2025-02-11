@@ -27,6 +27,7 @@ export class RBMQ_CONFIG {
                         agentsDlExchange,
                         agentsMqttExchange,
                         agentsAnonymousExchange,
+                        rbmqHost,
                         rbmqVhost
                     }
                 }
@@ -58,6 +59,7 @@ export class RBMQ_CONFIG {
                     agentsDlExchange,
                     agentsMqttExchange,
                     agentsAnonymousExchange,
+                    rbmqHost,
                     rbmqVhost
                 }
             }
@@ -88,6 +90,7 @@ export class RBMQ_CONFIG {
                     agentsDlExchange,
                     agentsMqttExchange,
                     agentsAnonymousExchange,
+                    rbmqHost,
                     rbmqVhost
                 }
             }
@@ -117,6 +120,7 @@ export class RBMQ_CONFIG {
                 agentsDlExchange,
                 agentsMqttExchange,
                 agentsAnonymousExchange,
+                rbmqHost,
                 rbmqVhost
             }
         }
