@@ -84,7 +84,7 @@ export class HelyosServices {
         this.url = url;
         this.ports = {socketPort: configOptions?.socketPort, gqlPort: configOptions?.gqlPort};
         this.path = configOptions?.path;
-        const _path = this.path? `/${this.path}`: '/graphql';
+        const _path = this.path? `/${this.path}/graphql`: '/graphql';
         this._httpLink = new HttpLink({
             uri: `${url}:${this.ports.gqlPort}${_path}`, fetch
         });
